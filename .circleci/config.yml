@@ -1,34 +1,28 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.9.1
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-working_directory: ~/repo
-steps:
-      # Checkout the code from the branch into the working_directory
-      - checkout
-      # Log the current branch
-      - run:
-          name: Show current branch
-          command: echo ${CIRCLE_BRANCH}
+machine:
+  environment:
+    CIRCLE_BUILD_DIR: $HOME/$CIRCLE_PROJECT_REPONAME
+    PATH: $PATH:$CIRCLE_BUILD_DIR/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
-      - run: npm i
-      # run tests!
-      - run: npm run test
-      - run: sudo apt-get update && sudo apt-get install -y python-dev
-      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
-      - run: sudo python get-pip.py
-      - run: sudo pip install awscli --upgrade
-      - run: aws --version
-      - run: aws s3 ls
-      - run: npm run deploy
+  post:
+    - mkdir -p $CIRCLE_BUILD_DIR/bin
+  node:
+    version: 8.9.1
+
+dependencies:
+  pre:
+    - go get -v github.com/bep/s3deploy
+  override:
+    - npm
+  cache_directories:
+    - ~/.cache/npm
+    - bin
+
+test:
+  override
+    - npm run build
+
+deployment:
+  s3up:
+    branch: develop
+    commands:
+      - s3deploy -source=dist/ -region=ap-southeast-1 -bucket=vuejs-ci-cd-aws
