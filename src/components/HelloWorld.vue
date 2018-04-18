@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Demo CI CD With S3 Circle CI</h2>
+    <h2>Demo CI CD With S3 Circle CI Route53 CloudFront</h2>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App In AWS S3'
+      msg: 'Welcome to Your Vue.js App In AWS S3 CloudFront Route53'
     }
   }
 }
