@@ -1,7 +1,7 @@
 {
   "name": "vuejs-ci-cd-aws",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js project CI CD AQS",
   "author": "athiwatp <athiwat.p5@gmail.com>",
   "private": true,
   "scripts": {
