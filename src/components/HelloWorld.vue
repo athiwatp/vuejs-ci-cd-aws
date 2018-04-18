@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Test AWS CI CD</h2>
+    <h2>Test</h2>
     <ul>
       <li>
         <a
@@ -88,7 +88,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App CI CD AWS Circle CI'
+      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
