@@ -41,4 +41,4 @@ steps:
       - run: sudo pip install awscli --upgrade
       - run: aws --version
       - run: aws s3 ls
-      - run: yarn run deploy
+      - run: npm run deploy
